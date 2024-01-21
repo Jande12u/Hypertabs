@@ -1,10 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 body {
-  background-color: #be5960;
+  background-color: #be5960; /* Set the background color to #be5960 */
+}
+
+body::after {
+  content: ""; /* Create a pseudo-element to represent the background image */
   background-image: url('https://static.wikia.nocookie.net/bighero6/images/c/c9/Hiro.png');
   background-position: center right;
   background-size: auto; /* Keep the original width and length of the background image */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place the pseudo-element behind the content */
 }
 
 /* ... other styles ... */
