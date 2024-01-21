@@ -8,7 +8,7 @@ class Info {
 
   // get users approximate city, latitude, and longitude based on IP
   static async getIpLoc() {
-    let data = await this.getResponse(`${path}${xor.encode("http://ip-api.com/json/" + ip)}`);
+    let data = await this.getResponse(`{xor.encode("http://ip-api.com/json/" + ip)}`);
     let latlon = `${data.lat},${data.lon}`;
     let city = data.city;
     return { latlon, city };
