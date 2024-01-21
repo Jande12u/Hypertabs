@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 body {
   font-family: Roboto, "Segoe UI", Tahoma, sans-serif;
+  background-color: #be5960; /* Set the background color to #be5960 */
+  background-image: url('https://static.wikia.nocookie.net/bighero6/images/c/c9/Hiro.png/revision/latest/scale-to-width/360?cb=20200715181506'); /* Add the image URL */
+  background-repeat: no-repeat; /* Ensure the background image doesn't repeat */
+  background-position: center right; /* Position the image at the center-right */
+  background-size: auto; /* Keep the original width and length of the background image */
 }
+
 .center {
   text-align: center;
   position: absolute;
