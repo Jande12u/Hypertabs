@@ -95,7 +95,7 @@
   height: 100%;
 }
 .chrome-tabs .chrome-tab .chrome-tab-background > svg .chrome-tab-geometry {
-  fill: #f4f5f6;
+  fill: #d69293;
 }
 .chrome-tabs .chrome-tab[active] {
   z-index: 5;
@@ -165,7 +165,7 @@
   overflow: hidden;
   white-space: nowrap;
   margin-left: 4px;
-  color: #5f6368;
+  color: m bjkhb,#bbcedd;
   -webkit-mask-image: linear-gradient(
     90deg,
     #000 0%,
@@ -191,7 +191,7 @@
   display: none;
 }
 .chrome-tabs .chrome-tab[active] .chrome-tab-title {
-  color: #45474a;
+  color: #b5b8ec;
 }
 .chrome-tabs .chrome-tab .chrome-tab-drag-handle {
   position: absolute;
@@ -216,15 +216,15 @@
 }
 @media (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:hover {
-    background-color: #e8eaed;
+    background-color: #bbcedd;
   }
   .chrome-tabs .chrome-tab .chrome-tab-close:hover:active {
-    background-color: #dadce0;
+    background-color: #bbcfdd;
   }
 }
 @media not all and (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:active {
-    background-color: #dadce0;
+    background-color: #bbcfdd;
   }
 }
 @media (hover: hover) {
@@ -321,7 +321,7 @@
 }
 
 #createTab {
-  color: #fff;
+  color: #85a2b6;
   outline: none;
   height: 30px;
   margin-top: 8px;
@@ -331,5 +331,5 @@
 }
 
 #createTab:hover {
-  color: #e04c4c;
+  color: #1c71ac;
 }

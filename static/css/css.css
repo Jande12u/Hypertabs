@@ -83,7 +83,7 @@ body {
   height: 48px;
 }
 .bookmarks {
-  border-bottom: 1px solid black !important;
+  border-bottom: 1px solid #bd0000 !important;
   white-space: nowrap;
 }
 #ad {

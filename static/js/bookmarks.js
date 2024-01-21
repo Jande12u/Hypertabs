@@ -73,7 +73,7 @@ function initBookmarks(dep = 0) {
         menu.setAttribute("id", "bmenu");
         let ul = document.createElement("ul");
         ul.setAttribute("id", "bul");
-        ul.style.color = localStorage.getItem("nt");
+        ul.style.color = "#be5960";
         [
           {
             name: "Delete",

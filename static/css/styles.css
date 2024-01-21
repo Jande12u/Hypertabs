@@ -1,0 +1,16 @@
+.center {
+    position: relative;
+    display: inline-block;
+}
+
+img.hover {
+    display: none;
+}
+
+.center:hover img.normal {
+    display: none;
+}
+
+.center:hover img.hover {
+    display: inline-block;
+}

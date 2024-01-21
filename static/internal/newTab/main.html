@@ -16,8 +16,10 @@
         -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>New Hypertab</title>
+		<title>New BayMax Tab</title>
 		<link rel="stylesheet" href="/css/css.css" />
+		<link rel="stylesheet" href="styles.css">
+
 	</head>
 
 	<body id="body">
@@ -25,21 +27,25 @@
 		<script src="/js/bookmarks.js"></script>
 		<script src="/uv/uv.bundle.js"></script>
 		<script src="/uv/uv.config.js"></script>
-		<!-- <script src="/js/weather.js"></script> -->
+		<script src="/js/weather.js"></script>
 		<script>
 			// const ip = "<?php echo $_SERVER['HTTP_X_FORWARDED_FOR'] ?>";
 		</script>
 		<div class="bookmarks"></div>
 		<div class="info">
 			<div id="weather">
-				<!--   Weather Widget in TOP RIGHT   -->
-				<!-- <h2 id="winfo">Loading...</h2>
-            <h2 id="alerts"></h2> -->
+			 <!--   Weather Widget in TOP RIGHT   -->
+			 <h2 id="winfo">Loading...</h2>
+             <h2 id="alerts"></h2> -->
 			</div>
 		</div>
 
-		<div class="center">
-			<h1 id="headtxt">Hypertabs</h1>
+		<div class="center" onmouseover="startHover()" onmouseout="stopHover()">
+			<img class="normal" src="https://media4.giphy.com/media/gCANwADwdazG8/giphy.gif" alt="Normal GIF"> <!-- Initial normal gif -->
+			<img class="hover" src="https://media1.giphy.com/media/CfKLVkWoG81FK/giphy.gif?cid=ecf05e471gzrgt4b4dg2qaufag1m1lnnfl5jkc4hqxe2zuc6&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Hover GIF">
+			<script src="/script.js"></script>
+
+		    
 			<forum
 				id="input"
 				onkeydown="if(event.key == 'Enter'){location.href=`${__uv$config.prefix}${xor.encode(window.parent.searchEngine+document.getElementById('inputb').value)}`}"
@@ -65,17 +71,6 @@
 				>
 					<img class="icn" src="/bookmark.png" />
 					<a class="btn">Music</a>
-				</div>
-				<div onclick="location.href='/c.html'" class="crm">
-					<img class="icn" src="/icon.png" />
-					<a class="btn">Contributors</a>
-				</div>
-				<div
-					onclick="location.href=__uv$config.prefix+xor.encode('https://discord.gg/J3VPy5Vy8x')"
-					class="crm"
-				>
-					<img class="icn" src="/dcd.png" />
-					<a class="btn">Join Discord</a>
 				</div>
 			</div>
 		</div>
