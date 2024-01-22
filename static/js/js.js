@@ -101,32 +101,39 @@ function getForward(id) {
 // get's bookmark URL
 async function getIcon(id) {
 	let urlIco = CONTENT_WINDOW(id).document.querySelector(
-		'link[rel="favicon"], link[rel="shortcut icon"], link[rel="icon"]'
+	  'link[rel="favicon"], link[rel="shortcut icon"], link[rel="icon"]'
 	);
 	if (urlIco !== null) {
-		if (urlIco.href.includes('data:image/png;base64')) return urlIco.href;
-
-		const res = await bare.fetch(urlIco.href);
-		const obj = URL.createObjectURL([await res.blob()], {
-			type: res.headers.get('content-type') || 'image/x-icon',
-		});
-
-		setTimeout(() => URL.revokeObjectURL(obj), 1e3);
-
-		return obj;
+	  if (urlIco.href.includes('data:image/png;base64')) {
+		console.log("URL:", urlIco.href);
+		return urlIco.href;
+	  }
+  
+	  const res = await bare.fetch(urlIco.href);
+	  const obj = URL.createObjectURL([await res.blob()], {
+		type: res.headers.get('content-type') || 'image/x-icon',
+	  });
+  
+	  setTimeout(() => URL.revokeObjectURL(obj), 1e3);
+  
+	  console.log("URL:", obj);
+	  return obj;
 	} else {
-		const res = await bare.fetch(
-			new URL('/favicon.ico', CONTENT_WINDOW(id).location)
-		);
-		const obj = URL.createObjectURL([await res.blob()], {
-			type: res.headers.get('content-type') || 'image/x-icon',
-		});
-
-		setTimeout(() => URL.revokeObjectURL(obj), 1e3);
-
-		return obj;
+	  const res = await bare.fetch(
+		new URL('/favicon.ico', CONTENT_WINDOW(id).location)
+	  );
+	  const obj = URL.createObjectURL([await res.blob()], {
+		type: res.headers.get('content-type') || 'image/x-icon',
+	  });
+  
+	  setTimeout(() => URL.revokeObjectURL(obj), 1e3);
+  
+	  console.log("URL:", obj);
+	  return obj;
 	}
-}
+  }
+  
+
 // Sets tab information
 async function setInfo(frameId) {
 	//if the site we are on is not proxied.
@@ -492,7 +499,7 @@ async function AddBookmark(id) {
 			' ' +
 			CONTENT_WINDOW(id).document.getElementsByTagName('title')[0].firstChild
 				.textContent
-	);
+	  );
 	data.push([
 		CONTENT_WINDOW(id).location.href,
 		await getIcon(id),
