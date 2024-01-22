@@ -7,8 +7,7 @@ function tryParse(x) {
 }
 document.head.insertAdjacentHTML(
   "beforebegin",
-  `<style>.bookmarks {background: ${localStorage.getItem(
-    "tabact"
+  `<style>.bookmarks {background: ##be5960
   )}; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
 );
 
