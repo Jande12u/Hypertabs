@@ -103,39 +103,41 @@ async function getIcon(id) {
 	let urlIco = CONTENT_WINDOW(id).document.querySelector(
 	  'link[rel="favicon"], link[rel="shortcut icon"], link[rel="icon"]'
 	);
+  
 	if (urlIco !== null) {
 	  if (urlIco.href.includes('data:image/png;base64')) {
 		console.log("URL:", urlIco.href);
-		console.log(urlco.href)
+		console.log(urlIco.href)
 		return urlIco.href;
 	  }
-       
-	  const res = await bare.fetch(urlIco.href);
-	  console.log(url)
-	  const obj = URL.createObjectURL([await res.blob()], {
-		type: res.headers.get('content-type') || 'image/x-icon',
-	  });
   
-	  setTimeout(() => URL.revokeObjectURL(obj), 1e3);
+	  const res = await bare.fetch(urlIco.href);
+	  console.log(urlIco)
+	  const blob = await res.blob();
+  
+	  const obj = window.URL.createObjectURL(new Blob([blob], { type: res.headers.get('content-type') || 'image/x-icon' }));
+  
+	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3);
   
 	  console.log("URL:", obj);
-
+  
 	  return obj;
 	} else {
 	  const res = await bare.fetch(
 		new URL('/favicon.ico', CONTENT_WINDOW(id).location)
 	  );
-	  console.log(URL)
-	  const obj = URL.createObjectURL([await res.blob()], {
-		type: res.headers.get('content-type') || 'image/x-icon',
-	  });
+	  
+	  const blob = await res.blob();
   
-	  setTimeout(() => URL.revokeObjectURL(obj), 1e3);
+	  const obj = window.URL.createObjectURL(new Blob([blob], { type: res.headers.get('content-type') || 'image/x-icon' }));
+  
+	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3);
   
 	  console.log("URL:", obj);
 	  return obj;
 	}
   }
+  
   
 
 // Sets tab information
