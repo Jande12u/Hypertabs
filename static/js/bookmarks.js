@@ -1,142 +1,128 @@
+/*
+  _____                   _                _     _                                                                      
+ |  __ \                 | |              | |   | |                                                                     
+ | |__) |   ___    _ __  | |_    ___    __| |   | |__    _   _                                                          
+ |  ___/   / _ \  | '__| | __|  / _ \  / _` |   | '_ \  | | | |                                                         
+ | |      | (_) | | |    | |_  |  __/ | (_| |   | |_) | | |_| |                                                         
+ |_|       \___/  |_|     \__|  \___|  \__,_|   |_.__/   \__, |                                                         
+                                                          __/ |                                                         
+                                                         |___/                                                          
+                                _     _                     _       _   _          _                               _    
+     /\                        | |   | |                   | |     | \ | |        | |                             | |   
+    /  \     _ __ ___     ___  | |_  | |__    _   _   ___  | |_    |  \| |   ___  | |_  __      __   ___    _ __  | | __
+   / /\ \   | '_ ` _ \   / _ \ | __| | '_ \  | | | | / __| | __|   | . ` |  / _ \ | __| \ \ /\ / /  / _ \  | '__| | |/ /
+  / ____ \  | | | | | | |  __/ | |_  | | | | | |_| | \__ \ | |_    | |\  | |  __/ | |_   \ V  V /  | (_) | | |    |   < 
+ /_/    \_\ |_| |_| |_|  \___|  \__| |_| |_|  \__, | |___/  \__|   |_| \_|  \___|  \__|   \_/\_/    \___/  |_|    |_|\_\
+                                               __/ |                                                                    
+                                              |___/                                                                     
+*/
+
 function tryParse(x) {
     try {
-        return JSON.parse(x);
+      return JSON.parse(x);
     } catch (er) {
-        console.error("Error parsing JSON:", er);
-        return null;
+      return null;
     }
-}
-
-async function getIcon(url) {
-    try {
-        const response = await fetch(`/fetch/b64/${url}`);
-        const blob = await response.blob();
-
-        if (!blob) {
-            console.error("Error: Received empty blob.");
-            return null;
-        }
-
-        return URL.createObjectURL(blob);
-    } catch (error) {
-        console.error("Error fetching or creating icon:", error);
-        return null;
-    }
-}
-
-document.head.insertAdjacentHTML(
+  }
+  document.head.insertAdjacentHTML(
     "beforebegin",
-    `<style>.bookmarks {background: #be5960; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
-);
-
-async function initBookmarks(dep = 0) {
+    `<style>.bookmarks {background: ${localStorage.getItem(
+      "tabact"
+    )}; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
+  );
+  function initBookmarks(dep = 0) {
+    // If the user fucks up localStorage somehow, this could occur.
+    // Prevent issues by simply giving up.
     if (dep > 5) return;
-
+  
+    // Locally saved bookmarks as Stringified 2D Array
     let bookmarksLocal = localStorage.getItem("bookmarks");
-    console.log("Bookmarks from Local Storage:", bookmarksLocal);
-
+  
+    // Where to add these element
     let bookmarks = document.querySelector(".bookmarks");
-
+  
+    // If valid
     if (bookmarksLocal !== null && Array.isArray(tryParse(bookmarksLocal))) {
-        let json = JSON.parse(bookmarksLocal);
-        console.log("Parsed Bookmarks:", json);
-
-        json.forEach(async (bookmark) => {
-            console.log("Adding Bookmark:", bookmark);
-
-            let [site, ico, title] = bookmark;
-            let elem = document.createElement("a");
-            elem.textContent = title;
-            elem.setAttribute("id", "bookmarka");
-
-            // Fetch icon with error handling
-            let iconUrl = await getIcon(ico);
-            if (iconUrl !== null) {
-                elem.style.backgroundImage = "url(" + iconUrl + ")";
-            } else {
-                console.error("Error getting icon. Using default background.");
-            }
-
-            elem.style.color = localStorage.getItem("tabacttit");
-            elem.href = site;
-
-            elem.addEventListener("contextmenu", function (e) {
-                [0].forEach.call(document.getElementsByClassName("bkmks"), (a) => {
-                    a.parentElement.removeChild(a);
-                });
-                e.preventDefault();
-                let { pageX, pageY } = e;
-                let menu = document.createElement("div");
-                menu.style.position = "fixed";
-                menu.style.left = pageX + "px";
-                menu.style.top = pageY + "px";
-                menu.style.backgroundColor = localStorage.getItem("tabbkg");
-                menu.setAttribute("id", "bmenu");
-                let ul = document.createElement("ul");
-                ul.setAttribute("id", "bul");
-                ul.style.color = "#be5960";
-                [
-                    {
-                        name: "Delete",
-                        func: () => {
-                            elem.parentElement.removeChild(elem);
-                            removeBookmark(bookmark);
-                        },
-                    },
-                ].forEach((i) => {
-                    let li = document.createElement("li");
-                    li.style.color = localStorage.getItem("nt");
-                    ul.appendChild(li);
-                    li.setAttribute("id", "bul");
-                    li.setAttribute("class", "bkmks");
-                    li.textContent = i.name;
-                    li.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        i.func();
-                    });
-                });
-                menu.appendChild(ul);
-
-                let a = function () {
-                    if (menu.parentElement) menu.parentElement.removeChild(menu);
-                    window.removeEventListener("input", a);
-                };
-                document.body.appendChild(menu);
-                window.addEventListener("click", a);
+      // Parse
+      let json = JSON.parse(bookmarksLocal);
+      // Loop
+      json.forEach((bookmark) => {
+        /fetch/b64/favicon.ico
+        // Woah
+        let [site, ico, title] = bookmark;
+  
+        // Create the element
+        let elem = document.createElement("a");
+        elem.textContent = title;
+        elem.setAttribute("id", "bookmarka");
+        elem.style.backgroundImage = "url(" + ico + ")";
+        elem.style.color = localStorage.getItem("tabacttit");
+        elem.href = site;
+  
+        elem.addEventListener("contextmenu", function (e) {
+          [0].forEach.call(document.getElementsByClassName("bkmks"), (a) => {
+            a.parentElement.removeChild(a);
+          });
+          e.preventDefault();
+          let { pageX, pageY } = e;
+          let menu = document.createElement("div");
+          menu.style.position = "fixed";
+          menu.style.left = pageX + "px";
+          menu.style.top = pageY + "px";
+          menu.style.backgroundColor = localStorage.getItem("tabbkg");
+          menu.setAttribute("id", "bmenu");
+          let ul = document.createElement("ul");
+          ul.setAttribute("id", "bul");
+          ul.style.color = localStorage.getItem("nt");
+          [
+            {
+              name: "Delete",
+              func: () => {
+                elem.parentElement.removeChild(elem);
+                removeBookmark(bookmark);
+              },
+            },
+          ].forEach((i) => {
+            let li = document.createElement("li");
+            li.style.color = localStorage.getItem("nt");
+            ul.appendChild(li);
+            li.setAttribute("id", "bul");
+            li.setAttribute("class", "bkmks");
+            li.textContent = i.name;
+            li.addEventListener("click", (e) => {
+              e.preventDefault();
+              i.func();
             });
-
-            bookmarks.appendChild(elem);
+          });
+          menu.appendChild(ul);
+  
+          let a = function () {
+            if (menu.parentElement) menu.parentElement.removeChild(menu);
+            window.removeEventListener("input", a);
+          };
+          document.body.appendChild(menu);
+          window.addEventListener("click", a);
         });
-    } else if (bookmarksLocal === null) {
-        localStorage.setItem("bookmarks", "[]");
-        initBookmarks(dep + 1);
+  
+        bookmarks.appendChild(elem);
+      });
     } else {
-        // Proceed with parsing and displaying existing bookmarks
-        let json = JSON.parse(bookmarksLocal);
-        console.log("Parsed Bookmarks:", json);
-
-        // Rest of your code to display bookmarks
-        // ...
+      // Initialize new locally stored bookmark
+      localStorage.setItem("bookmarks", "[ ]");
+      initBookmarks(dep + 1);
     }
-}
-
-window.addEventListener("DOMContentLoaded", initBookmarks);
-document.body.style.backgroundColor = localStorage.getItem("tabact");
-
-function removeBookmark(a) {
+    // JSON.parse
+    // localStorage.getItem
+    // [ [ "domain.com", "favicon", "title" ], [ ".org", "favicon", "b3at is smart" ] ]
+  }
+  
+  // this is where bookmark code goes
+  window.addEventListener("DOMContentLoaded", initBookmarks);
+  document.body.style.backgroundColor = localStorage.getItem("tabact");
+  function removeBookmark(a) {
     let data = JSON.parse(localStorage.getItem("bookmarks"));
     index = data.indexOf(a);
-    console.log("Removing Bookmark:", a);
+    console.log(a);
     data.splice(index, 1);
     localStorage.setItem("bookmarks", JSON.stringify(data));
-}
-
-// Example modification for handling file input change event
-function handleFileInputChange(e) {
-    if (e.target.files.length !== 0) {
-        // Proceed with setting the image state
-        this.setState({ image: URL.createObjectURL(e.target.files[0]) });
-    } else {
-        console.error("No files selected.");
-    }
-}
+  }
