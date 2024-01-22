@@ -111,35 +111,22 @@ async function getIcon(id) {
 		return urlIco.href;
 	  }
   
-	  const res = await bare.fetch(urlIco.href);
-	  console.log(urlIco);
-  
-	  const blob = await res.blob();
-	  const obj = window.URL.createObjectURL(blob);
-  
-	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3); // Ensure to revoke after using the blob URL
-  
-	  console.log("URL:", obj);
-  
-	  return obj;
+	  return urlIco.href; // Directly return the favicon URL
 	} else {
 	  const res = await bare.fetch(
 		new URL('/favicon.ico', CONTENT_WINDOW(id).location)
 	  );
   
 	  const blob = await res.blob();
-	  const obj = window.URL.createObjectURL(blob);
+	  const blobUrl = window.URL.createObjectURL(blob);
   
-	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3); // Ensure to revoke after using the blob URL
-  
-	  console.log("URL:", obj);
-	  return obj;
+	  // Consider saving the blobUrl somewhere if you need it persistently
+      console.log("Blob URL:", blobUrl);
+	  // Instead of returning the blob URL directly, you can return the regular image URL
+	  return blobUrl; 
 	}
   }
   
-  
-  
-
 // Sets tab information
 async function setInfo(frameId) {
 	//if the site we are on is not proxied.
