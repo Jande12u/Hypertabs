@@ -101,9 +101,16 @@ async function initBookmarks(dep = 0) {
 
             bookmarks.appendChild(elem);
         });
-    } else {
+    } else if (bookmarksLocal === null) {
         localStorage.setItem("bookmarks", "[]");
         initBookmarks(dep + 1);
+    } else {
+        // Proceed with parsing and displaying existing bookmarks
+        let json = JSON.parse(bookmarksLocal);
+        console.log("Parsed Bookmarks:", json);
+
+        // Rest of your code to display bookmarks
+        // ...
     }
 }
 
