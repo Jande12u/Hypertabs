@@ -147,7 +147,7 @@ async function getIcon(id) {
 	  console.log("URL:", obj);
 	  return obj;
 	}
-  }
+  
   
 
 // Sets tab information
