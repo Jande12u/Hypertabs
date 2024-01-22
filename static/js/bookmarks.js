@@ -29,6 +29,7 @@ function initBookmarks(dep = 0) {
       let elem = document.createElement("div");
       elem.setAttribute("id", "bookmarkDiv");
       elem.style.display = "inline-block"; // Set display to inline-block
+      elem.style.marginRight = "10px"; // Add margin between bookmarks
 
       // Use regular image tag instead of background image
       let img = document.createElement("img");
