@@ -130,3 +130,13 @@ function removeBookmark(a) {
     data.splice(index, 1);
     localStorage.setItem("bookmarks", JSON.stringify(data));
 }
+
+// Example modification for handling file input change event
+function handleFileInputChange(e) {
+    if (e.target.files.length !== 0) {
+        // Proceed with setting the image state
+        this.setState({ image: URL.createObjectURL(e.target.files[0]) });
+    } else {
+        console.error("No files selected.");
+    }
+}
