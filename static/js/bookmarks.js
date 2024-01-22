@@ -11,6 +11,12 @@ async function getIcon(url) {
     try {
         const response = await fetch(`/fetch/b64/${url}`);
         const blob = await response.blob();
+
+        if (!blob) {
+            console.error("Error: Received empty blob.");
+            return null;
+        }
+
         return URL.createObjectURL(blob);
     } catch (error) {
         console.error("Error fetching or creating icon:", error);
