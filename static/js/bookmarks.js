@@ -56,7 +56,7 @@ function initBookmarks(dep = 0) {
       // Add a space between icon and text
       textSpan.style.marginLeft = "5px"; // Adjust margin as needed
 
-      elem.style.color = localStorage.getItem("tabacttit");
+      elem.style.color = "#be5960 !important";
       elem.style.marginBottom = "5px"; // Add margin between bookmarks
 
       elem.addEventListener("contextmenu", function (e) {
