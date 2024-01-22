@@ -8,8 +8,7 @@ function tryParse(x) {
 
 document.head.insertAdjacentHTML(
   "beforebegin",
-  `<style>.bookmarks {background: ##be5960
-  )}; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
+  `<style>.bookmarks {background: ##be5960; height: 29.2px; position: absolute; left: 0; right: 0; top: 0; display: flex;}</style>`
 );
 
 function initBookmarks(dep = 0) {
@@ -19,7 +18,7 @@ function initBookmarks(dep = 0) {
   let bookmarksLocal = localStorage.getItem("bookmarks");
 
   // Where to add these elements
-  let bookmarks = document.querySelector(".bookmarks");
+  let bookmarksContainer = document.querySelector(".bookmarks");
 
   if (bookmarksLocal !== null && Array.isArray(tryParse(bookmarksLocal))) {
     let json = JSON.parse(bookmarksLocal);
@@ -29,6 +28,7 @@ function initBookmarks(dep = 0) {
       // Create the element using regular div
       let elem = document.createElement("div");
       elem.setAttribute("id", "bookmarkDiv");
+      elem.style.display = "inline-block"; // Set display to inline-block
 
       // Use regular image tag instead of background image
       let img = document.createElement("img");
@@ -46,8 +46,6 @@ function initBookmarks(dep = 0) {
       textSpan.style.marginLeft = "5px"; // Adjust margin as needed
 
       elem.style.color = localStorage.getItem("tabacttit");
-      elem.style.display = "flex"; // Set display to flex
-      elem.style.alignItems = "center"; // Align items in the center
       elem.style.marginBottom = "5px"; // Add margin between bookmarks
 
       elem.addEventListener("contextmenu", function (e) {
@@ -95,7 +93,7 @@ function initBookmarks(dep = 0) {
         window.addEventListener("click", a);
       });
 
-      bookmarks.appendChild(elem);
+      bookmarksContainer.appendChild(elem);
     });
   } else {
     // Initialize new locally stored bookmark
