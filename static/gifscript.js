@@ -1,3 +1,4 @@
+
 const normalGifs = [
     "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExam1oazc3aDY0cTdiYjRpcG1mYWJqaml0cWtpdWMxc2R2amVwZnVvOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gCANwADwdazG8/giphy.gif",
     "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmE4cjE5N2hqNnpwcTF5eXpxOWljZnp1cW93azUzdHNxdDlrcjVmcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/37LZIKnmJyzQs/giphy.gif",
@@ -20,50 +21,34 @@ const hoverGifs = [
     "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG4yd2tpZWllcWx0ZXZoYnN0ZmRnNzRtam83cnRkOXpzMGJlajNrMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iLD0cclRovNFC/giphy.gif"
 ];
 
-let hoverInterval;
-let normalInterval;
+let currentHoverGif = "";
 
 function startHover() {
     clearInterval(normalInterval); // Clear the interval for normal GIFs
-    
-    const randomHoverGif = getRandomGif(hoverGifs);
-    document.querySelector('.hover').src = randomHoverGif;
 
-    // Change the hover gif when hovered again
-    document.querySelector('.center').addEventListener('mouseover', changeHoverGif);
+    // Choose a random hover gif
+    currentHoverGif = getRandomGif(hoverGifs);
+    document.querySelector('.hover').src = currentHoverGif;
+
+    // Add a class to the container when hovering
+    document.querySelector('.container').classList.add('hovering');
 }
 
 function stopHover() {
-    clearInterval(hoverInterval); // Clear the interval for hover GIFs
-
+    // Change back to a random normal gif
     const randomNormalGif = getRandomGif(normalGifs);
     document.querySelector('.normal').src = randomNormalGif;
 
-    // Change the normal gif every 15 seconds
+    // Start the interval to change the normal gif every 15 seconds
     normalInterval = setInterval(() => {
         document.querySelector('.normal').src = getRandomGif(normalGifs);
     }, 15000);
 
-    // Remove the event listener for changing hover gif on hover
-    document.querySelector('.center').removeEventListener('mouseover', changeHoverGif);
-}
-
-function changeHoverGif() {
-    clearInterval(hoverInterval);
-
-    const randomHoverGif = getRandomGif(hoverGifs);
-    document.querySelector('.hover').src = randomHoverGif;
-
-    // Continue playing the new hover gif while hovering
-    hoverInterval = setInterval(() => {
-        document.querySelector('.hover').src = randomHoverGif;
-    }, 60000);
+    // Remove the class added when not hovering
+    document.querySelector('.container').classList.remove('hovering');
 }
 
 function getRandomGif(gifArray) {
     const randomIndex = Math.floor(Math.random() * gifArray.length);
     return gifArray[randomIndex];
 }
-
-// Initial setup to start changing the normal gif
-stopHover();
