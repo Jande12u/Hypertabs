@@ -405,7 +405,7 @@ if (!('tabbkg' in localStorage)) {
 	localStorage.setItem('tabbkg', '#202124');
 	localStorage.setItem('tabhover', '#292b2e');
 	localStorage.setItem('tabact', '#be5960');
-	localStorage.setItem('tabacttit', '#f1f3f4');
+	localStorage.setItem('tabacttit', '#a00d1e');
 	localStorage.setItem('tabinatit', '#9ca1a7');
 	localStorage.setItem('searchbar', '#202124');
 	localStorage.setItem('mockb', '#323639');
@@ -440,8 +440,8 @@ function applyTheme(frame) {
 			localStorage.setItem('tabbkg', '#202124');
 			localStorage.setItem('tabhover', '#202124');
 			localStorage.setItem('tabact', '#be5960');
-			localStorage.setItem('tabacttit', '#9ca1a7');
-			localStorage.setItem('tabacttit', '#f1f3f4');
+			localStorage.setItem('tabacttit', '#a00d1e');
+			localStorage.setItem('tabacttit', '#a00d1e');
 			localStorage.setItem('tabinatit', '#9ca1a7');
 			localStorage.setItem('searchbar', '#202124');
 			localStorage.setItem('mockb', '#323639');
@@ -452,8 +452,8 @@ function applyTheme(frame) {
 			localStorage.setItem('tabbkg', '#f4f5f6');
 			localStorage.setItem('tabhover', '#f4f5f6');
 			localStorage.setItem('tabact', '#be5960');
-			localStorage.setItem('tabacttit', '#9ca1a7');
-			localStorage.setItem('tabacttit', '#45474a');
+			localStorage.setItem('tabacttit', '#a00d1e');
+			localStorage.setItem('tabacttit', '#a00d1e');
 			localStorage.setItem('tabinatit', '#5f6368');
 			localStorage.setItem('searchbar', '#D0D8E8 ');
 			localStorage.setItem('mockb', '#fff');
