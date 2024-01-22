@@ -5,106 +5,112 @@ function tryParse(x) {
     return null;
   }
 }
+
 document.head.insertAdjacentHTML(
   "beforebegin",
   `<style>.bookmarks {background: ##be5960
   )}; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
 );
 
-
 function initBookmarks(dep = 0) {
   if (dep > 5) return;
-  
+
   // Locally saved bookmarks as Stringified 2D Array
   let bookmarksLocal = localStorage.getItem("bookmarks");
- 
-   // Where to add these element
+
+  // Where to add these elements
   let bookmarks = document.querySelector(".bookmarks");
- 
- 
 
- if (bookmarksLocal !== null && Array.isArray(tryParse(bookmarksLocal))) {
-   let json = JSON.parse(bookmarksLocal);
-   json.forEach((bookmark) => {
-     let [site, ico, title] = bookmark;
+  if (bookmarksLocal !== null && Array.isArray(tryParse(bookmarksLocal))) {
+    let json = JSON.parse(bookmarksLocal);
+    json.forEach((bookmark) => {
+      let [site, ico, title] = bookmark;
 
-     // Create the element using regular image tag
-     let elem = document.createElement("a");
-     elem.textContent = title;
-     elem.setAttribute("id", "bookmarka");
+      // Create the element using regular div
+      let elem = document.createElement("div");
+      elem.setAttribute("id", "bookmarkDiv");
 
-     // Use regular image tag instead of background image
-     let img = document.createElement("img");
-     img.src = ico;
-     img.style.width = "16px"; // Set the width of the image (adjust as needed)
-     img.style.height = "16px"; // Set the height of the image (adjust as needed)
-     elem.appendChild(img);
+      // Use regular image tag instead of background image
+      let img = document.createElement("img");
+      img.src = ico;
+      img.style.width = "16px"; // Set the width of the image (adjust as needed)
+      img.style.height = "16px"; // Set the height of the image (adjust as needed)
+      elem.appendChild(img);
 
-     elem.style.color = localStorage.getItem("tabacttit");
-     elem.href = site;
+      // Create a span for the text
+      let textSpan = document.createElement("span");
+      textSpan.textContent = title;
+      elem.appendChild(textSpan);
 
-     elem.addEventListener("contextmenu", function (e) {
-       [0].forEach.call(document.getElementsByClassName("bkmks"), (a) => {
-         a.parentElement.removeChild(a);
-       });
-       e.preventDefault();
-       let { pageX, pageY } = e;
-       let menu = document.createElement("div");
-       menu.style.position = "fixed";
-       menu.style.left = pageX + "px";
-       menu.style.top = pageY + "px";
-       menu.style.backgroundColor = localStorage.getItem("tabbkg");
-       menu.setAttribute("id", "bmenu");
-       let ul = document.createElement("ul");
-       ul.setAttribute("id", "bul");
-       ul.style.color = localStorage.getItem("nt");
-       [
-         {
-           name: "Delete",
-           func: () => {
-             elem.parentElement.removeChild(elem);
-             removeBookmark(bookmark);
-           },
-         },
-       ].forEach((i) => {
-         let li = document.createElement("li");
-         li.style.color = localStorage.getItem("nt");
-         ul.appendChild(li);
-         li.setAttribute("id", "bul");
-         li.setAttribute("class", "bkmks");
-         li.textContent = i.name;
-         li.addEventListener("click", (e) => {
-           e.preventDefault();
-           i.func();
-         });
-       });
-       menu.appendChild(ul);
+      // Add a space between icon and text
+      textSpan.style.marginLeft = "5px"; // Adjust margin as needed
 
-       let a = function () {
-         if (menu.parentElement) menu.parentElement.removeChild(menu);
-         window.removeEventListener("input", a);
-       };
-       document.body.appendChild(menu);
-       window.addEventListener("click", a);
-     });
+      elem.style.color = localStorage.getItem("tabacttit");
+      elem.style.display = "flex"; // Set display to flex
+      elem.style.alignItems = "center"; // Align items in the center
+      elem.style.marginBottom = "5px"; // Add margin between bookmarks
 
-     bookmarks.appendChild(elem);
-   });
- } else {
-     // Initialize new locally stored bookmark
-     localStorage.setItem("bookmarks", "[ ]");
-     initBookmarks(dep + 1);
- }
+      elem.addEventListener("contextmenu", function (e) {
+        [0].forEach.call(document.getElementsByClassName("bkmks"), (a) => {
+          a.parentElement.removeChild(a);
+        });
+        e.preventDefault();
+        let { pageX, pageY } = e;
+        let menu = document.createElement("div");
+        menu.style.position = "fixed";
+        menu.style.left = pageX + "px";
+        menu.style.top = pageY + "px";
+        menu.style.backgroundColor = localStorage.getItem("tabbkg");
+        menu.setAttribute("id", "bmenu");
+        let ul = document.createElement("ul");
+        ul.setAttribute("id", "bul");
+        ul.style.color = localStorage.getItem("nt");
+        [
+          {
+            name: "Delete",
+            func: () => {
+              elem.parentElement.removeChild(elem);
+              removeBookmark(bookmark);
+            },
+          },
+        ].forEach((i) => {
+          let li = document.createElement("li");
+          li.style.color = localStorage.getItem("nt");
+          ul.appendChild(li);
+          li.setAttribute("id", "bul");
+          li.setAttribute("class", "bkmks");
+          li.textContent = i.name;
+          li.addEventListener("click", (e) => {
+            e.preventDefault();
+            i.func();
+          });
+        });
+        menu.appendChild(ul);
+
+        let a = function () {
+          if (menu.parentElement) menu.parentElement.removeChild(menu);
+          window.removeEventListener("input", a);
+        };
+        document.body.appendChild(menu);
+        window.addEventListener("click", a);
+      });
+
+      bookmarks.appendChild(elem);
+    });
+  } else {
+    // Initialize new locally stored bookmark
+    localStorage.setItem("bookmarks", "[ ]");
+    initBookmarks(dep + 1);
+  }
 }
 
- window.addEventListener("DOMContentLoaded", initBookmarks);
- document.body.style.backgroundColor = localStorage.getItem("tabact");
- function removeBookmark(a) {
-   let data = JSON.parse(localStorage.getItem("bookmarks"));
-   index = data.indexOf(a);
-   console.log(a);
-   data.splice(index, 1);
-   localStorage.setItem("bookmarks", JSON.stringify(data));
- }
+window.addEventListener("DOMContentLoaded", initBookmarks);
+document.body.style.backgroundColor = localStorage.getItem("tabact");
 
-// ... (existing code)
+function removeBookmark(a) {
+  let data = JSON.parse(localStorage.getItem("bookmarks"));
+  index = data.indexOf(a);
+  console.log(a);
+  data.splice(index, 1);
+  localStorage.setItem("bookmarks", JSON.stringify(data));
+}
