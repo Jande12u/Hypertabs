@@ -47,7 +47,7 @@ function tryParse(x) {
       let json = JSON.parse(bookmarksLocal);
       // Loop
       json.forEach((bookmark) => {
-        /fetch/b64/favicon.ico
+        //fetch/b64/favicon.ico
         // Woah
         let [site, ico, title] = bookmark;
   
