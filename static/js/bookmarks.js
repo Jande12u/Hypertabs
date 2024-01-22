@@ -7,12 +7,23 @@ function tryParse(x) {
     }
 }
 
+async function getIcon(url) {
+    try {
+        const response = await fetch(`/fetch/b64/${url}`);
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);
+    } catch (error) {
+        console.error("Error fetching or creating icon:", error);
+        return null;
+    }
+}
+
 document.head.insertAdjacentHTML(
     "beforebegin",
     `<style>.bookmarks {background: #be5960; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
 );
 
-function initBookmarks(dep = 0) {
+async function initBookmarks(dep = 0) {
     if (dep > 5) return;
 
     let bookmarksLocal = localStorage.getItem("bookmarks");
@@ -24,14 +35,22 @@ function initBookmarks(dep = 0) {
         let json = JSON.parse(bookmarksLocal);
         console.log("Parsed Bookmarks:", json);
 
-        json.forEach((bookmark) => {
+        json.forEach(async (bookmark) => {
             console.log("Adding Bookmark:", bookmark);
 
             let [site, ico, title] = bookmark;
             let elem = document.createElement("a");
             elem.textContent = title;
             elem.setAttribute("id", "bookmarka");
-            elem.style.backgroundImage = "url(" + ico + ")";
+
+            // Fetch icon with error handling
+            let iconUrl = await getIcon(ico);
+            if (iconUrl !== null) {
+                elem.style.backgroundImage = "url(" + iconUrl + ")";
+            } else {
+                console.error("Error getting icon. Using default background.");
+            }
+
             elem.style.color = localStorage.getItem("tabacttit");
             elem.href = site;
 
