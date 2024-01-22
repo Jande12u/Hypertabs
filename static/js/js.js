@@ -100,6 +100,7 @@ function getForward(id) {
 }
 // get's bookmark URL
 
+console.log(regurl)
 
 async function getIcon(id) {
 		// Assuming regurl is already defined in your code
