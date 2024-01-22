@@ -404,7 +404,7 @@ if (!('tabbkg' in localStorage)) {
 	// theming! | redo this shit
 	localStorage.setItem('tabbkg', '#202124');
 	localStorage.setItem('tabhover', '#292b2e');
-	localStorage.setItem('tabact', '#323639');
+	localStorage.setItem('tabact', '#be5960');
 	localStorage.setItem('tabacttit', '#f1f3f4');
 	localStorage.setItem('tabinatit', '#9ca1a7');
 	localStorage.setItem('searchbar', '#202124');
@@ -439,19 +439,19 @@ function applyTheme(frame) {
 		case 'Reset':
 			localStorage.setItem('tabbkg', '#202124');
 			localStorage.setItem('tabhover', '#202124');
-			localStorage.setItem('tabact', '#323639');
+			localStorage.setItem('tabact', '#be5960');
 			localStorage.setItem('tabacttit', '#9ca1a7');
 			localStorage.setItem('tabacttit', '#f1f3f4');
 			localStorage.setItem('tabinatit', '#9ca1a7');
 			localStorage.setItem('searchbar', '#202124');
 			localStorage.setItem('mockb', '#323639');
-			localStorage.setItem('nt', '#FFF');
+			localStorage.setItem('nt', '#a00d1e');
 			location.reload();
 			break;
 		case 'Light':
 			localStorage.setItem('tabbkg', '#f4f5f6');
 			localStorage.setItem('tabhover', '#f4f5f6');
-			localStorage.setItem('tabact', '#fff');
+			localStorage.setItem('tabact', '#be5960');
 			localStorage.setItem('tabacttit', '#9ca1a7');
 			localStorage.setItem('tabacttit', '#45474a');
 			localStorage.setItem('tabinatit', '#5f6368');
