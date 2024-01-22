@@ -99,22 +99,10 @@ function getForward(id) {
 	return getPage(id);
 }
 // get's bookmark URL
-async function getIcon() {
-    // Assuming regurl is already defined in your code
-    let urlIco; // Declare the variable
-
-    if (regurl) {
-        const favicon = document.createElement('img');
-        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicons?domain=${regurl}`);
-        favicon.setAttribute('alt', 'Favicon');
-        // You can append the 'favicon' img element to your desired location in the DOM here.
-        // Example: document.body.appendChild(favicon);
-
-        // Assign the favicon URL to the urlIco variable if needed
-        urlIco = `https://s2.googleusercontent.com/s2/favicons?domain=${regurl}`;
-    }
- }
-
+async function getIcon(id) {
+	let urlIco = CONTENT_WINDOW(id).document.querySelector(
+	  'link[rel="favicon"], link[rel="shortcut icon"], link[rel="icon"]'
+	);
 	if (urlIco !== null) {
 	  if (urlIco.href.includes('data:image/png;base64')) {
 		console.log("URL:", urlIco.href);
@@ -147,7 +135,7 @@ async function getIcon() {
 	  console.log("URL:", obj);
 	  return obj;
 	}
-  
+  }
   
 
 // Sets tab information
