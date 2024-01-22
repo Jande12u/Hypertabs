@@ -99,7 +99,7 @@ function getForward(id) {
 	return getPage(id);
 }
 // get's bookmark URL
-async function getIcon() {
+async function getIcon(id) {
     // Assuming regurl is already defined in your code
     let urlIco; // Declare the variable
 
@@ -147,6 +147,7 @@ async function getIcon() {
 	  console.log("URL:", obj);
 	  return obj;
 	}
+}
   
   
 
