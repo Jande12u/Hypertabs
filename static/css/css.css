@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 body {
-  background-color: #be5960; /* Set the background color to #be5960 */
+  background-color: #be5960 !important; /* Set the background color to #be5960 with !important */
 }
 
 body::after {
@@ -16,6 +16,7 @@ body::after {
   height: 100%;
   z-index: -1; /* Place the pseudo-element behind the content */
 }
+
 
 /* ... other styles ... */
 
