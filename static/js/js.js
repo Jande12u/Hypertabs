@@ -107,17 +107,17 @@ async function getIcon(id) {
 	if (urlIco !== null) {
 	  if (urlIco.href.includes('data:image/png;base64')) {
 		console.log("URL:", urlIco.href);
-		console.log(urlIco.href)
+		console.log(urlIco.href);
 		return urlIco.href;
 	  }
   
 	  const res = await bare.fetch(urlIco.href);
-	  console.log(urlIco)
+	  console.log(urlIco);
+  
 	  const blob = await res.blob();
+	  const obj = window.URL.createObjectURL(blob);
   
-	  const obj = window.URL.createObjectURL(new Blob([blob], { type: res.headers.get('content-type') || 'image/x-icon' }));
-  
-	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3);
+	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3); // Ensure to revoke after using the blob URL
   
 	  console.log("URL:", obj);
   
@@ -126,17 +126,17 @@ async function getIcon(id) {
 	  const res = await bare.fetch(
 		new URL('/favicon.ico', CONTENT_WINDOW(id).location)
 	  );
-	  
+  
 	  const blob = await res.blob();
+	  const obj = window.URL.createObjectURL(blob);
   
-	  const obj = window.URL.createObjectURL(new Blob([blob], { type: res.headers.get('content-type') || 'image/x-icon' }));
-  
-	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3);
+	  setTimeout(() => window.URL.revokeObjectURL(obj), 1e3); // Ensure to revoke after using the blob URL
   
 	  console.log("URL:", obj);
 	  return obj;
 	}
   }
+  
   
   
 
