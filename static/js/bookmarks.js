@@ -1,3 +1,18 @@
+function tryParse(x) {
+  try {
+    return JSON.parse(x);
+  } catch (er) {
+    return null;
+  }
+}
+document.head.insertAdjacentHTML(
+  "beforebegin",
+  `<style>.bookmarks {background: ${localStorage.getItem(
+    "tabact"
+  )}; height: 29.2px; position: absolute; left: 0; right: 0; top: 0;}</style>`
+);
+
+
 function initBookmarks(dep = 0) {
   if (dep > 5) return;
   
