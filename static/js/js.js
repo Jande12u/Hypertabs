@@ -408,7 +408,7 @@ if (!('tabbkg' in localStorage)) {
 	localStorage.setItem('tabacttit', '#a00d1e');
 	localStorage.setItem('tabinatit', '#9ca1a7');
 	localStorage.setItem('searchbar', '#202124');
-	localStorage.setItem('mockb', '#323639');
+	localStorage.setItem('mockb', '#be5960');
 	localStorage.setItem('nt', '#FFF');
 	localStorage.setItem('ua', navigator.userAgent);
 }
@@ -444,7 +444,7 @@ function applyTheme(frame) {
 			localStorage.setItem('tabacttit', '#a00d1e');
 			localStorage.setItem('tabinatit', '#9ca1a7');
 			localStorage.setItem('searchbar', '#202124');
-			localStorage.setItem('mockb', '#323639');
+			localStorage.setItem('mockb', '#be5960');
 			localStorage.setItem('nt', '#a00d1e');
 			location.reload();
 			break;
@@ -457,7 +457,7 @@ function applyTheme(frame) {
 			localStorage.setItem('tabinatit', '#5f6368');
 			localStorage.setItem('searchbar', '#D0D8E8 ');
 			localStorage.setItem('mockb', '#fff');
-			localStorage.setItem('nt', '#323639');
+			localStorage.setItem('nt', '#be5960');
 			location.reload();
 			break;
 	}
