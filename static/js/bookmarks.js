@@ -8,7 +8,17 @@ function tryParse(x) {
 
 document.head.insertAdjacentHTML(
   "beforebegin",
-  `<style>.bookmarks {background: ##be5960; height: 29.2px; position: absolute; left: 0; right: 0; top: 0; display: flex;}</style>`
+  `<style>
+    .bookmarks {
+      background: ${localStorage.getItem("tabact")};
+      height: 29.2px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      display: flex;
+    }
+  </style>`
 );
 
 function initBookmarks(dep = 0) {
